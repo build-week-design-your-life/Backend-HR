@@ -1,4 +1,4 @@
-exports.up = function (knex) {
+exports.up = function(knex) {
   return knex.schema
     .createTable('users', tbl => {
       tbl.increments('user_id');
@@ -41,60 +41,64 @@ exports.up = function (knex) {
     })
     .createTable('daily_journal_entries', tbl => {
       tbl.increments('journal_entry_id');
-      tbl.integer('user_id')
-      .unsigned()
-      .notNullable()
-      .references('user_id')
-      .inTable('activities')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+      tbl
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('user_id')
+        .inTable('activities')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       tbl.string('daily_journal_title').notNullable();
       tbl.text('daily_journal_content').notNullable();
       tbl.timestamp('daily_journal_date');
     })
     .createTable('weekly_journal_entries', tbl => {
       tbl.increments('weekly_entry_id');
-      tbl.integer('user_id')
-      .unsigned()
-      .notNullable()
-      .references('user_id')
-      .inTable('activities')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+      tbl
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('user_id')
+        .inTable('activities')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       tbl.string('weekly_journal_title').notNullable();
       tbl.text('weekly_journal_content').notNullable();
       tbl.timestamp('weekly_journal_date');
     })
     .createTable('activity_ratings', tbl => {
       tbl.increments('rating_id');
-      tbl.integer('user_id')
-      .unsigned()
-      .notNullable()
-      .references('user_id')
-      .inTable('activities')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
-      tbl.integer('activity_id')
-      .unsigned()
-      .notNullable()
-      .references('activity_id')
-      .inTable('activities')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+      tbl
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('user_id')
+        .inTable('activities')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
+      tbl
+        .integer('activity_id')
+        .unsigned()
+        .notNullable()
+        .references('activity_id')
+        .inTable('activities')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       tbl.integer('activity_rating_engagement').notNullable();
       tbl.integer('activity_rating_enjoyment').notNullable();
       tbl.integer('activity_rating_energy').notNullable();
       tbl.date('activity_rating_date').notNullable();
       tbl.float('activity_rating_rating');
-  })
-};
-
-exports.up = function(knex) {
-  return knex.schema.createTable('activity_categories', tbl => {
-    tbl.increments('category_id');
-
+    });
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('users').dropTableIfExists('activity_categories');
+  return knex.schema
+    .dropTableIfExists('users')
+    .dropTableIfExists('activity_categories')
+    .dropTableIfExists('activities')
+    .dropTableIfExists('daily_journal_entries')
+    .dropTableIfExists('weekly_reflection_entries')
+    .dropTableIfExists('activity_ratings');
 };
