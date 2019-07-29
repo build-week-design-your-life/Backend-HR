@@ -3,7 +3,13 @@ const router = require('express').Router();
 const UserDB = require('./userModel');
 
 router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Users Route.' });
+  const users = UserDB.find()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(error => {
+      res.status(400).json(error);
+    });
 });
 
 module.exports = router;
