@@ -1,4 +1,4 @@
 module.exports = {
-  jtwCheckIt:
+  jtwSecret:
     process.env.JWT_SECRET || 'Hello. Probably should not be in this file.'
 };

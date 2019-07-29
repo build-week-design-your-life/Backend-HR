@@ -2,22 +2,22 @@ exports.up = function(knex) {
   return knex.schema
     .createTable('users', tbl => {
       tbl.increments('user_id');
-      tbl.integer('age', 255).notNullable();
+      tbl.integer('age', 255);
       tbl
-        .string('email_address', 255)
+        .string('email', 255)
         .notNullable()
         .unique();
-      tbl.string('firstname', 255).notNullable();
-      tbl.string('gender', 6).notNullable();
-      tbl.string('lastname', 255).notNullable();
-      tbl.string('city', 255).notNullable();
-      tbl.string('state', 255).notNullable();
+      tbl.string('firstname', 255);
+      tbl.string('gender').notNullable();
+      tbl.string('lastname', 255);
+      tbl.string('city', 255);
+      tbl.string('state', 255);
       tbl.string('password', 255).notNullable();
       tbl
         .string('username', 255)
         .unique()
         .notNullable();
-      tbl.string('zipcode', 255).notNullable();
+      tbl.string('zipcode', 255);
     })
     .createTable('activity_categories', tbl => {
       tbl.increments('category_id');

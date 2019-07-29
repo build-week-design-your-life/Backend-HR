@@ -8,7 +8,7 @@ exports.seed = function(knex) {
         {
           firstname: 'Xena',
           lastname: 'Veel',
-          email_address: 'xveel0@studiopress.com',
+          email: 'xveel0@studiopress.com',
           gender: 'Female',
           age: 50,
           password: 'test',
@@ -20,7 +20,7 @@ exports.seed = function(knex) {
         {
           firstname: 'Chloe',
           lastname: 'Czaple',
-          email_address: 'cczaple1@flickr.com',
+          email: 'cczaple1@flickr.com',
           gender: 'Female',
           age: 4,
           password: 'test',
@@ -32,7 +32,7 @@ exports.seed = function(knex) {
         {
           firstname: 'Willa',
           lastname: 'Charlon',
-          email_address: 'wcharlon2@sun.com',
+          email: 'wcharlon2@sun.com',
           gender: 'Female',
           age: 84,
           password: 'test',

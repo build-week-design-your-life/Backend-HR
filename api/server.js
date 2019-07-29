@@ -7,6 +7,11 @@ const helmet = require('helmet');
 const userRouter = require('../users/usersRouter');
 const activitiesRouter = require('../activities/activitiesRouter');
 const journalsRouter = require('../journals/journalsRouter');
+const authRouter = require('../auth/authRouter');
+
+// auth
+const { authenticate } = require('../auth/authenticate');
+
 // express
 const server = express();
 
@@ -19,9 +24,9 @@ server.get('/', (req, res) => {
   res.status(200).json({ message: 'Server up.' });
 });
 
-// server.use('/api/auth', authRouter);
-server.use('/api/users', userRouter);
-server.use('/api/activities', activitiesRouter);
-server.use('/api/journals', journalsRouter);
+server.use('/api/users', authenticate, userRouter);
+server.use('/api/auth', authRouter);
+server.use('/api/activities', authenticate, activitiesRouter);
+server.use('/api/journals', authenticate, journalsRouter);
 
 module.exports = server;
