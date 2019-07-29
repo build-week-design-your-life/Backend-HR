@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const UserDB = require('./userModel');
+const UserDB = require('./usersModel');
 
 router.get('/', (req, res) => {
   const users = UserDB.find()
