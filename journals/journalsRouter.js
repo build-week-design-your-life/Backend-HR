@@ -3,9 +3,20 @@ const router = require('express').Router();
 const dailyDB = require('./dailyJournalsModel');
 const weeklyDB = require('./weeklyJournalsModel');
 
+const { authenticate } = require('../auth/authenticate');
+
 router.get('/daily', (req, res) => {
+  res.status(400).json({ error: 'No user ID.' });
+});
+
+router.get('/weekly', (req, res) => {
+  res.status(400).json({ error: 'No user ID.' });
+});
+
+router.get('/daily/:id', authenticate, (req, res) => {
+  const { id } = req.params;
   const dailyEntries = dailyDB
-    .find()
+    .findByUser()
     .then(dailies => {
       res.status(200).json(dailies);
     })
@@ -14,9 +25,10 @@ router.get('/daily', (req, res) => {
     });
 });
 
-router.get('/weekly', (req, res) => {
+router.get('/weekly/:id', (req, res) => {
+  const { id } = req.params;
   const weeklyEntries = weeklyDB
-    .find()
+    .findByUser()
     .then(weekly => {
       res.status(200).json(weekly);
     })

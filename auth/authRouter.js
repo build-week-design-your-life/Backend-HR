@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
 });
 
 // user login
-router.post('/login', authenticate, (req, res) => {
+router.post('/login', (req, res) => {
   let { username, password } = req.body;
 
   UsersDB.findBy({ username })

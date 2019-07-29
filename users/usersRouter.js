@@ -12,4 +12,15 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  const user = UserDB.findById(id)
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(error => {
+      res.status(400).json(error);
+    });
+});
+
 module.exports = router;
