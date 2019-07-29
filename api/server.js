@@ -24,7 +24,7 @@ server.get('/', (req, res) => {
   res.status(200).json({ message: 'Server up.' });
 });
 
-server.use('/api/users', authenticate, userRouter);
+server.use('/api/users', userRouter);
 server.use('/api/auth', authRouter);
 server.use('/api/activities', authenticate, activitiesRouter);
 server.use('/api/journals', authenticate, journalsRouter);
