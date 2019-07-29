@@ -1,0 +1,19 @@
+{
+  "name": "design-your-life-backend",
+  "version": "1.0.0",
+  "description": "a backend api for lambda school build week 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/build-week-design-your-life/Backend-HR.git"
+  },
+  "author": "Hunter Raffety",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/build-week-design-your-life/Backend-HR/issues"
+  },
+  "homepage": "https://github.com/build-week-design-your-life/Backend-HR#readme"
+}
