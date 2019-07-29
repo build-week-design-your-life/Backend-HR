@@ -2,19 +2,22 @@ exports.up = function(knex) {
   return knex.schema
     .createTable('users', tbl => {
       tbl.increments('user_id');
-      tbl
-        .string('username', 255)
-        .unique()
-        .notNullable();
-      tbl.string('password', 255).notNullable();
+      tbl.integer('age', 255).notNullable();
       tbl
         .string('email_address', 255)
         .notNullable()
         .unique();
       tbl.string('firstname', 255).notNullable();
-      tbl.string('lastname', 255).notNullable();
       tbl.string('gender', 6).notNullable();
-      tbl.integer('age', 255).notNullable();
+      tbl.string('lastname', 255).notNullable();
+      tbl.string('city', 255).notNullable();
+      tbl.string('state', 255).notNullable();
+      tbl.string('password', 255).notNullable();
+      tbl
+        .string('username', 255)
+        .unique()
+        .notNullable();
+      tbl.string('zipcode', 255).notNullable();
     })
     .createTable('activity_categories', tbl => {
       tbl.increments('category_id');
@@ -46,26 +49,26 @@ exports.up = function(knex) {
         .unsigned()
         .notNullable()
         .references('user_id')
-        .inTable('activities')
+        .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       tbl.string('daily_journal_title').notNullable();
       tbl.text('daily_journal_content').notNullable();
       tbl.timestamp('daily_journal_date');
     })
-    .createTable('weekly_journal_entries', tbl => {
+    .createTable('weekly_reflection_entries', tbl => {
       tbl.increments('weekly_entry_id');
       tbl
         .integer('user_id')
         .unsigned()
         .notNullable()
         .references('user_id')
-        .inTable('activities')
+        .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      tbl.string('weekly_journal_title').notNullable();
-      tbl.text('weekly_journal_content').notNullable();
-      tbl.timestamp('weekly_journal_date');
+      tbl.string('weekly_reflection_title').notNullable();
+      tbl.text('weekly_reflection_content').notNullable();
+      tbl.timestamp('weekly_reflection_date');
     })
     .createTable('activity_ratings', tbl => {
       tbl.increments('rating_id');
@@ -74,7 +77,7 @@ exports.up = function(knex) {
         .unsigned()
         .notNullable()
         .references('user_id')
-        .inTable('activities')
+        .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       tbl
@@ -89,7 +92,7 @@ exports.up = function(knex) {
       tbl.integer('activity_rating_enjoyment').notNullable();
       tbl.integer('activity_rating_energy').notNullable();
       tbl.date('activity_rating_date').notNullable();
-      tbl.float('activity_rating_rating');
+      tbl.float('activity_rating_average');
     });
 };
 

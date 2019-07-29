@@ -6,8 +6,8 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex('users').insert([
         {
-          first_name: 'Xena',
-          last_name: 'Veel',
+          firstname: 'Xena',
+          lastname: 'Veel',
           email_address: 'xveel0@studiopress.com',
           gender: 'Female',
           age: 50,
@@ -15,11 +15,11 @@ exports.seed = function(knex) {
           username: 'xveel0',
           city: 'Norfolk',
           state: 'Virginia',
-          zip_code: '23504'
+          zipcode: '23504'
         },
         {
-          first_name: 'Chloe',
-          last_name: 'Czaple',
+          firstname: 'Chloe',
+          lastname: 'Czaple',
           email_address: 'cczaple1@flickr.com',
           gender: 'Female',
           age: 4,
@@ -27,11 +27,11 @@ exports.seed = function(knex) {
           username: 'cczaple1',
           city: 'Riverside',
           state: 'California',
-          zip_code: '92505'
+          zipcode: '92505'
         },
         {
-          first_name: 'Willa',
-          last_name: 'Charlon',
+          firstname: 'Willa',
+          lastname: 'Charlon',
           email_address: 'wcharlon2@sun.com',
           gender: 'Female',
           age: 84,
@@ -39,7 +39,7 @@ exports.seed = function(knex) {
           username: 'wcharlon2',
           city: 'Charleston',
           state: 'South Carolina',
-          zip_code: '29416'
+          zipcode: '29416'
         }
       ]);
     });

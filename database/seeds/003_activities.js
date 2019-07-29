@@ -8,6 +8,7 @@ exports.seed = function(knex) {
         {
           user_id: 1,
           activity_name: 'Fundamental',
+          activity_description: 'Fundamental',
           activity_duration: 47,
           activity_date: '10/20/2018',
           activity_added: '5/11/2019',
@@ -17,6 +18,7 @@ exports.seed = function(knex) {
         {
           user_id: 2,
           activity_name: 'framework',
+          activity_description: 'Fundamental',
           activity_duration: 26,
           activity_date: '9/21/2018',
           activity_added: '1/9/2019',
@@ -26,6 +28,7 @@ exports.seed = function(knex) {
         {
           user_id: 3,
           activity_name: 'artificial intelligence',
+          activity_description: 'Fundamental',
           activity_duration: 68,
           activity_date: '12/30/2018',
           activity_added: '9/25/2018',
