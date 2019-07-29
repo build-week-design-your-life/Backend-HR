@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 const UsersDB = require('../users/usersModel');
 
+const { authenticate } = require('./authenticate');
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const secrets = require('../config/secrets');
@@ -22,7 +24,7 @@ router.post('/register', (req, res) => {
 });
 
 // user login
-router.post('/login', (req, res) => {
+router.post('/login', authenticate, (req, res) => {
   let { username, password } = req.body;
 
   UsersDB.findBy({ username })

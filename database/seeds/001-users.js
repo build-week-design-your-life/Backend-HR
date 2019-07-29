@@ -7,16 +7,16 @@ exports.seed = function(knex) {
       return knex('users').insert([
         {
           password: 'test',
-          username: 'test'
+          username: 'test1'
         },
         {
-          password: 'test1',
-          username: 'test'
-        }        {
-          password: 'test2',
-          username: 'test',
-
+          password: 'test',
+          username: 'test2'
         },
+        {
+          password: 'test',
+          username: 'test3'
+        }
       ]);
     });
 };
