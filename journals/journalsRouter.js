@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
-const dailyDB = require('./dailyJournalsModel');
-const weeklyDB = require('./weeklyJournalsModel');
+// const DailyDB = require('./dailyJournalsModel');
+// const WeeklyDB = require('./weeklyJournalsModel');
+const JournalsDB = require('./journalsModel');
 
 const { authenticate } = require('../auth/authenticate');
 

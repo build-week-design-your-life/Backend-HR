@@ -18,9 +18,9 @@ exports.up = function(knex) {
         .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      tbl.string('journal_content').notNullable();
-      tbl.string('journal_title').notNullable();
-      tbl.string('journal_type').notNullable();
+      tbl.string('journal_content', 255).notNullable();
+      tbl.string('journal_title', 128).notNullable();
+      tbl.string('journal_type', 128).notNullable();
       tbl.date('journal_date');
     });
   // .createTable('weekly_reflection_entries', tbl => {
