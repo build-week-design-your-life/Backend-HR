@@ -27,7 +27,7 @@ router.get('/:type/:id', authenticate, (req, res) => {
 
 router.get('/:id', authenticate, (req, res) => {
   const { id } = req.params;
-  JournalsDB.findById({ id })
+  JournalsDB.findEntryById({ id })
     .then(entry => {
       res.status(200).json(entry);
     })
@@ -52,7 +52,7 @@ router.delete('/:type/:id', authenticate, (req, res) => {
   const { id } = req.params;
   JournalsDB.remove(id)
     .then(removed => {
-      res.status(200).json(removed);
+      res.status(200).json({ message: `Entry successfully deleted.` });
     })
     .catch(error => {
       res.status(500).json(error);
