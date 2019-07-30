@@ -36,8 +36,9 @@ router.get('/:id', authenticate, (req, res) => {
     });
 });
 
-router.post('/', authenticate, (req, res) => {
+router.post('/add', authenticate, (req, res) => {
   const journal = req.body;
+  console.log(req.body);
   JournalsDB.insert(journal)
     .then(entry => {
       res.status(201).json(entry);

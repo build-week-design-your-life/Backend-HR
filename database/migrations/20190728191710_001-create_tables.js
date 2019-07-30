@@ -21,27 +21,33 @@ exports.up = function(knex) {
       tbl.string('journal_content', 255).notNullable();
       tbl.string('journal_title', 128).notNullable();
       tbl.string('journal_type', 128).notNullable();
-      tbl.timestamp('journal_date');
-      tbl.timestamp('journal_update');
+      tbl.string('journal_date');
+      tbl.string('journal_update');
+    })
+    .createTable('activities', tbl => {
+      tbl.increments();
+      tbl
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
+      tbl
+        .string('activity_name', 255)
+        .notNullable()
+        .unique();
+      tbl.integer('activity_energy').notNullable();
+      tbl.integer('activity_enjoyment').notNullable();
+      tbl.integer('activity_engagement').notNullable();
+      tbl.date('activity_date');
     });
-  // .createTable('weekly_reflection_entries', tbl => {
-  //   tbl.increments('weekly_entry_id');
-  //   tbl
-  //     .integer('user_id')
-  //     .unsigned()
-  //     .notNullable()
-  //     .references('user_id')
-  //     .inTable('users')
-  //     .onUpdate('CASCADE')
-  //     .onDelete('CASCADE');
-  //   tbl.string('weekly_reflection_title').notNullable();
-  //   tbl.text('weekly_reflection_content').notNullable();
-  //   tbl.timestamp('weekly_reflection_date');
-  // });
 };
 
 exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists('users')
-    .dropTableIfExists('journal_entries');
+    .dropTableIfExists('journal_entries')
+    .dropTableIfExists('activities');
 };
