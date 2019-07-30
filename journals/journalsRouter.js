@@ -36,6 +36,29 @@ router.post('/', authenticate, (req, res) => {
     });
 });
 
+router.delete('/:type/:id', authenticate, (req, res) => {
+  const { id } = req.params;
+  JournalsDB.remove(id)
+    .then(removed => {
+      res.status(200).json(removed);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+router.put('/:id', authenticate, (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+  JournalsDB.update(id, changes)
+    .then(updated => {
+      res.status(200).json(updated);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
 // router.get('/weekly/:id', (req, res) => {
 //   const { id } = req.params;
 //   const weeklyEntries = JournalsDB.findById()

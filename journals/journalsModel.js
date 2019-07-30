@@ -26,10 +26,14 @@ function findById(id) {
   return db('journal_entries').where({ id });
 }
 
-function update(entry_id, changes) {
-  //
+function update(id, changes) {
+  return db('journal_entries')
+    .where({ id })
+    .update(changes);
 }
 
 function remove(id) {
-  //
+  return db('journal_entries')
+    .where({ id })
+    .del();
 }

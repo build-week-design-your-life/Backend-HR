@@ -21,7 +21,8 @@ exports.up = function(knex) {
       tbl.string('journal_content', 255).notNullable();
       tbl.string('journal_title', 128).notNullable();
       tbl.string('journal_type', 128).notNullable();
-      tbl.date('journal_date');
+      tbl.timestamp('journal_date');
+      tbl.timestamp('journal_update');
     });
   // .createTable('weekly_reflection_entries', tbl => {
   //   tbl.increments('weekly_entry_id');
