@@ -6,7 +6,6 @@
 All endpoints based off of the root URL provided above.
 
 # Open Routes
-
 **Getting all users:**
 GET request to:
 [https://hr-bw3.herokuapp.com/api/users](https://hr-bw3.herokuapp.com/api/users)
@@ -15,7 +14,7 @@ GET request to:
 POST request to:
 [https://hr-bw3.herokuapp.com/api/auth/register](https://hr-bw3.herokuapp.com/api/auth/register)
 
-*object shape:*
+*The object should follow this shape:*
 
        {
 	    "username": "test1",
@@ -37,9 +36,21 @@ POST request to:
 
 ## User Journals
 **GET request to:**
-This route will display user entries for their daily journal entries.
-[https://hr-bw3.herokuapp.com/api/journals/daily](https://hr-bw3.herokuapp.com/api/journals/daily)
+This route will display user entries for their journal entries, either weekly or daily.
+[https://hr-bw3.herokuapp.com/api/journals/:type/:id](https://hr-bw3.herokuapp.com/api/journals/:type/:id)
 
-**GET request to:**
-This route will display user entries for their weekly journal entries.
-[https://hr-bw3.herokuapp.com/api/journals/weekly](https://hr-bw3.herokuapp.com/api/journals/weekly)
+**POST request to:**
+This route will allow you to create and post journal entries or either type.
+[https://hr-bw3.herokuapp.com/api/journals](https://hr-bw3.herokuapp.com/api/journals/)
+
+*The object should follow this shape:*
+
+      {
+    	    "user_id": 2,
+    	    "journal_content": "test content",
+    	    "journal_title": "entry title",
+    	    "journal_type": "weekly", (or daily)
+    	    "journal_date": 1919394
+      }
+      
+For journal date, determine your best format for doing that. Maybe moment.js, or Date.now() with formatting.
