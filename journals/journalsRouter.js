@@ -25,6 +25,17 @@ router.get('/:type/:id', authenticate, (req, res) => {
     });
 });
 
+router.get('/mine', authenticate, (req, res) => {
+  const id = req.decoded.subject;
+  JournalsDB.findById(id)
+    .then(entries => {
+      res.status(200).json(entries);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
 router.get('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   JournalsDB.findEntryById({ id })
