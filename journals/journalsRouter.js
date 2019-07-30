@@ -25,6 +25,17 @@ router.get('/:type/:id', authenticate, (req, res) => {
     });
 });
 
+router.get('/:id', authenticate, (req, res) => {
+  const { id } = req.params;
+  JournalsDB.findById({ id })
+    .then(filtered => {
+      res.status(200).json(filtered);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
 router.post('/', authenticate, (req, res) => {
   const journal = req.body;
   JournalsDB.insert(journal)
