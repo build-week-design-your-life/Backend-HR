@@ -37,7 +37,7 @@ Password_
 POST request to:
 [https://hr-bw3.herokuapp.com/api/auth/login](https://hr-bw3.herokuapp.com/api/auth/login)
 
-## User Journals
+## Journals
 
 **GET request to: /api/journals/:type/:id**
 This route will get user entries for **ALL** of the users journal entries, either weekly or daily.
@@ -82,3 +82,13 @@ journal_update will store the time it was updated, in case it's needed.
 **DELETE request to: /api/journals/:type/:id**
 This route will allow you to **DELETE** a journal entry of either type.
 [https://hr-bw3.herokuapp.com/api/journals/type/:id](https://hr-bw3.herokuapp.com/api/journals/type/:id)
+
+## **Users:**
+
+**GET request to: /api/users**
+This route will allow you to GET all users.
+https://hr-bw3.herokuapp.com/api/users
+
+**GET request to: /api/users/:id**
+This route will allow you to GET a specific user.
+https://hr-bw3.herokuapp.com/api/users/:id
