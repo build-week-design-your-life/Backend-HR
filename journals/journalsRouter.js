@@ -28,8 +28,8 @@ router.get('/:type/:id', authenticate, (req, res) => {
 router.get('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   JournalsDB.findById({ id })
-    .then(filtered => {
-      res.status(200).json(filtered);
+    .then(entry => {
+      res.status(200).json(entry);
     })
     .catch(error => {
       res.status(500).json(error);

@@ -23,7 +23,7 @@ function findBy(filter, id) {
 }
 
 function findById(id) {
-  return db('journal_entries').where({ id });
+  return db('journal_entries').where(id);
 }
 
 function update(id, changes) {
