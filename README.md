@@ -81,7 +81,7 @@ journal_update will store the time it was updated, in case it's needed.
 
 **DELETE request to: /api/journals/:id**
 This route will allow you to **DELETE** a journal entry.
-[https://hr-bw3.herokuapp.com/api/journals/type/:id](https://hr-bw3.herokuapp.com/api/journals/type/:id) where `id` is the post you want to delete.
+[https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/:id) where `id` is the post you want to delete.
 
 ## **Users:**
 
