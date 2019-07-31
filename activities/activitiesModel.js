@@ -9,7 +9,7 @@ module.exports = {
   remove
 };
 
-function insert(user) {
+function insert(activity) {
   //
 }
 

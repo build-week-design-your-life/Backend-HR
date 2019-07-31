@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const ActivitiesDB = require('./activitiesModel');
-const CategoriesDB = require('./activityCategoriesModel');
+// const CategoriesDB = require('./activityCategoriesModel');
 
 router.get('/', (req, res) => {
   const activities = ActivitiesDB.find()
