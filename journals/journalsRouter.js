@@ -14,16 +14,68 @@ const { authenticate } = require('../auth/authenticate');
 //   res.status(400).json({ error: 'No user ID.' });
 // });
 
-router.get('/:type/:id', authenticate, (req, res) => {
-  const { type, id } = req.params;
-  JournalsDB.findBy(type, id)
-    .then(filtered => {
-      res.status(200).json(filtered);
+// router.get('/:type', authenticate, (req, res) => {
+//   const { type } = req.params;
+//   console.log(req.decoded);
+//   const id = req.decoded.subject;
+//   JournalsDB.findBy(type, id)
+//     .then(filtered => {
+//       console.log(filtered);
+//       res.status(200).json(filtered);
+//     })
+//     .catch(error => {
+//       res.status(500).json(error);
+//     });
+// });
+
+// router.get('/mine', authenticate, (req, res) => {
+//   const id = req.decoded.subject;
+//   JournalsDB.findById(id)
+//     .then(entries => {
+//       res.status(200).json(entries);
+//     })
+//     .catch(error => {
+//       res.status(500).json(error);
+//     });
+// });
+
+router.get('/all', authenticate, (req, res) => {
+  JournalsDB.find()
+    .then(entries => {
+      res.status(200).json(entries);
     })
     .catch(error => {
-      res.status(500).json(error);
+      res.status(500).json({ error: 'Uh oh, you done messed up A-A-ron!' });
     });
 });
+
+// router.get('/daily', authenticate, (req, res) => {
+//   const id = req.decoded.subject;
+//   console.log(req.decoded);
+//   const filter = 'daily';
+//   console.log(req.params);
+//   JournalsDB.findBy(filter, id)
+//     .then(entries => {
+//       res.status(200).json(entries);
+//     })
+//     .catch(error => {
+//       res.status(500).json(error);
+//     });
+// });
+
+// router.get('/weekly', authenticate, (req, res) => {
+//   const id = req.decoded.subject;
+//   console.log(req.decoded);
+//   const filter = 'weekly';
+//   console.log(req.params);
+//   JournalsDB.findBy(filter, id)
+//     .then(entries => {
+//       res.status(200).json(entries);
+//     })
+//     .catch(error => {
+//       res.status(500).json(error);
+//     });
+// });
 
 router.get('/mine', authenticate, (req, res) => {
   const id = req.decoded.subject;
@@ -38,32 +90,35 @@ router.get('/mine', authenticate, (req, res) => {
 
 router.get('/:id', authenticate, (req, res) => {
   const { id } = req.params;
+
   JournalsDB.findEntryById({ id })
     .then(entry => {
+      console.log(entry);
       res.status(200).json(entry);
     })
     .catch(error => {
-      res.status(500).json(error);
+      res.status(400).json({ message: 'not ok' });
     });
 });
 
 router.post('/add', authenticate, (req, res) => {
+  const user_id = req.decoded.subject;
   const journal = req.body;
-  console.log(req.body);
-  JournalsDB.insert(journal)
+  const combined = { user_id, ...journal };
+  JournalsDB.insert(combined)
     .then(entry => {
-      res.status(201).json(entry);
+      res.status(201).json({ message: 'good work', entry });
     })
     .catch(error => {
       res.status(500).json(error);
     });
 });
 
-router.delete('/:type/:id', authenticate, (req, res) => {
+router.delete('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   JournalsDB.remove(id)
     .then(removed => {
-      res.status(200).json({ message: `Entry successfully deleted.` });
+      res.status(200).json({ message: `Entry successfully deleted.`, removed });
     })
     .catch(error => {
       res.status(500).json(error);
