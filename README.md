@@ -22,12 +22,14 @@ _The object should follow this shape:_
         "password": "somepassword"
         }
 
-_Notes:_
+_Note:_
 Usernames are **unique**.
 
-# Protected Routes (Must be Logged In, Auth token stored.)
+# PROTECTED ROUTES
 
-Protected routes require an authorization token which is generated for you when you log in. If you're using Postman or Insomnia to test endpoints, you will need to add that authorization key that is returned to you when you hit the login route with a successful login.
+> Authentication required <------------------
+>
+> Protected routes require an authorization token which is generated for you when you log in. If you're using Postman or Insomnia to test endpoints, you will need to add that authorization key that is returned to you when you hit the login route with a successful login.
 
 ## **User Login:**
 
@@ -38,15 +40,20 @@ Password_
 **POST request to: /api/auth/login**
 [https://hr-bw3.herokuapp.com/api/auth/login](https://hr-bw3.herokuapp.com/api/auth/login)
 
-## Journals
+## JOURNALS
 
 **GET request to: /api/journals/**
-This route will get user entries for **ALL** users journal entries, either weekly or daily.
+This route will get user entries for **ALL** of the journal entries, either weekly or daily, regardless of the user. Would be for something like an administrator role. (This route is not best practice in a real world scenario, or in a dream scenario.)
+
 [https://hr-bw3.herokuapp.com/api/journals/all](https://hr-bw3.herokuapp.com/api/journals/:type/:id)
 
 **GET request to: /api/journals/:id**
-This route will get user entries for **A SINGLE** journal entry of any type.
+This route will get user entries for **A SINGLE** journal entry of any type for any user. (Same caveat.)
 [https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/:id) where `id` is the selected entry you want to view or edit.
+
+# CREATING A JOURNAL
+
+_This route will automatically grab the USER ID for the currently logged in user._
 
 **POST request to: /api/journals**
 This route will allow you to create and post journal entries or either type.
@@ -64,6 +71,14 @@ _The object should follow this shape:_
 
 For journal date, determine your best format for doing that. You can use `moment.js`, or `Date.now()` with formatting.
 
+# VIEWING LOGGED IN USERS JOURNALS
+
+**GET request to: /api/journals/mine**
+This route will let the **currently logged in user** view their journals. Useful for editing journal entries, displaying records, etc.
+http://localhost:3300/api/journals/mine
+
+# UPDATING A JOURNAL
+
 **PUT request to: /api/journals/:id**
 This route will allow you to **UPDATE** journal entries or either type.
 [https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/) where `id` is the selected post you're updating.
@@ -79,11 +94,13 @@ _The object should follow this shape:_
 
 journal_update will store the time it was updated, in case it's needed.
 
+# DELETING A JOURNAL
+
 **DELETE request to: /api/journals/:id**
 This route will allow you to **DELETE** a journal entry.
 [https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/:id) where `id` is the post you want to delete.
 
-## **Users:**
+## **USERS:**
 
 **GET request to: /api/users**
 This route will allow you to GET all users.
@@ -92,3 +109,9 @@ https://hr-bw3.herokuapp.com/api/users
 **GET request to: /api/users/:id**
 This route will allow you to GET a specific user.
 https://hr-bw3.herokuapp.com/api/users/:id
+
+## ACTIVITIES
+
+**GET request to /api/activities**
+This route will allow you to grab ALL activities.
+http://localhost:3300/api/activities
