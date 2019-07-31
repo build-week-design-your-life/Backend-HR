@@ -1,9 +1,9 @@
 # Design Your Life Backend API Endpoints
 
-**MAIN ROUTE**
+**BACKEND API URL:**
 [https://hr-bw3.herokuapp.com/](https://hr-bw3.herokuapp.com/)
 
-All endpoints based off of the root URL provided above.
+**All endpoints based off of the root URL provided above.**
 
 # Open Routes
 
@@ -31,7 +31,7 @@ Usernames are **unique**.
 >
 > Protected routes require an authorization token which is generated for you when you log in. If you're using Postman or Insomnia to test endpoints, you will need to add that authorization key that is returned to you when you hit the login route with a successful login.
 
-## **User Login:**
+## **USER LOGIN:**
 
 **Required credentials:**
 _Username
@@ -49,7 +49,8 @@ This route will get user entries for **ALL** of the journal entries, either week
 
 **GET request to: /api/journals/:id**
 This route will get user entries for **A SINGLE** journal entry of any type for any user. (Same caveat.)
-[https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/:id) where `id` is the selected entry you want to view or edit.
+[https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/:id)
+where `id` is the selected entry you want to view or edit.
 
 # CREATING A JOURNAL
 
@@ -81,7 +82,9 @@ http://localhost:3300/api/journals/mine
 
 **PUT request to: /api/journals/:id**
 This route will allow you to **UPDATE** journal entries or either type.
-[https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/) where `id` is the selected post you're updating.
+[https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/)
+
+where `id` is the selected post you're updating.
 
 _The object should follow this shape:_
 
@@ -98,7 +101,8 @@ journal_update will store the time it was updated, in case it's needed.
 
 **DELETE request to: /api/journals/:id**
 This route will allow you to **DELETE** a journal entry.
-[https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/:id) where `id` is the post you want to delete.
+[https://hr-bw3.herokuapp.com/api/journals/:id](https://hr-bw3.herokuapp.com/api/journals/:id)
+where `id` is the post you want to delete.
 
 ## **USERS:**
 

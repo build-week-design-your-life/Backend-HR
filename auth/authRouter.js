@@ -11,6 +11,7 @@ const secrets = require('../config/secrets');
 // register a user.
 router.post('/register', (req, res) => {
   let user = req.body;
+  console.log(req.body);
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
 
@@ -32,7 +33,7 @@ router.post('/login', (req, res) => {
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken(user);
-        
+
         res.status(200).json({
           message: `user.id = ${user.id} -- you are now logged in.`,
           user,

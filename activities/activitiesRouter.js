@@ -4,6 +4,7 @@ const ActivitiesDB = require('./activitiesModel');
 // const CategoriesDB = require('./activityCategoriesModel');
 
 router.get('/', (req, res) => {
+  console.log(`respond`, res);
   const activities = ActivitiesDB.find()
     .then(activities => {
       res.status(200).json(activities);
@@ -13,7 +14,8 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/categories', (req, res) => {
+router.get('/activities', (req, res) => {
+  console.log(req);
   const allCategories = CategoriesDB.find()
     .then(categories => {
       res.status(200).json(categories);
