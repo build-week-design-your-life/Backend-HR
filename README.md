@@ -116,6 +116,22 @@ https://hr-bw3.herokuapp.com/api/users/:id
 
 ## ACTIVITIES
 
-**GET request to /api/activities**
+**GET request to /api/activities/mine**
+This route will allow you to grab logged in user's activities.
+http://localhost:3300/api/activities
+
+**GET request to /api/activities/all**
 This route will allow you to grab ALL activities.
 http://localhost:3300/api/activities
+
+**GET request to /api/activities/:id**
+This route will allow you to grab specific activities & return their average ratings.
+http://localhost:3300/api/activities
+
+**DELETE request to /api/activities/:id**
+This route will allow you to **DELETE** an activity.
+http://localhost:3300/api/activities/:id
+
+**PUT request to /api/activities/:id**
+This route will allow you to **UPDATE** an activity.
+http://localhost:3300/api/activities/:id
