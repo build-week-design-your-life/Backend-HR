@@ -69,7 +69,6 @@ _The object should follow this shape:_
     	    "journal_date": 1919394
       }
 
-
 For journal date, determine your best format for doing that. You can use `moment.js`, or `Date.now()` with formatting.
 
 ## VIEWING LOGGED IN USERS JOURNALS
@@ -93,7 +92,6 @@ _The object should follow this shape:_
     	    "journal_title": "update entry title",
     	    "journal_update": 1919394
       }
-
 
 journal_update will store the time it was updated, in case it's needed.
 
@@ -120,30 +118,51 @@ https://hr-bw3.herokuapp.com/api/users/:id
 
 **GET request to /api/activities/mine**
 This route will allow you to grab logged in user's activities.
-http://localhost:3300/api/activities
+https://hr-bw3.herokuapp.com/api/activities
 
 **GET request to /api/activities/all**
 This route will allow you to grab ALL activities.
-http://localhost:3300/api/activities
+https://hr-bw3.herokuapp.com/api/activities
 
 **GET request to /api/activities/:id**
 This route will allow you to grab specific activities & return their average ratings.
-http://localhost:3300/api/activities
+https://hr-bw3.herokuapp.com/api/activities
 
 ## CREATING AN ACTIVITY
 
 **POST request to /api/activities**
 This route will allow you to **POST** an activity. **This is tied to the currently logged in user.**
-http://localhost:3300/api/activities
+https://hr-bw3.herokuapp.com/api/activities
+
+_The object should follow this shape:_
+
+      {
+    	    "activity_name": "Camping",
+    	    "activity_energy": 5,
+    	    "activity_enjoyment": 5,
+          "activity_engagement": 5,
+          "activity_date": 0393993
+      }
 
 ## DELETING AN ACTIVITY
 
 **DELETE request to /api/activities/:id**
 This route will allow you to **DELETE** an activity.
-http://localhost:3300/api/activities/:id
+https://hr-bw3.herokuapp.com/api/activities/:id
 
 ## UPDATING AN ACTIVITY
 
 **PUT request to /api/activities/:id**
 This route will allow you to **UPDATE** an activity.
-http://localhost:3300/api/activities/:id
+https://hr-bw3.herokuapp.com/api/activities/:id
+
+where `id` is the selected post you're updating.
+
+_The object should follow this shape:_
+
+      {
+    	    "activity_name": "Camping",
+    	    "activity_energy": 5,
+    	    "activity_enjoyment": 5,
+          "activity_engagement": 5,
+      }
