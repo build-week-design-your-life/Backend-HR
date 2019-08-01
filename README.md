@@ -17,10 +17,10 @@ POST request to:
 
 _The object should follow this shape:_
 
-       {
-        "username": "test1",
-        "password": "somepassword"
-        }
+      {
+            "username": "test1",
+            "password": "somepassword"
+      }
 
 _Note:_
 Usernames are **unique**.
@@ -63,10 +63,10 @@ This route will allow you to create and post journal entries or either type.
 _The object should follow this shape:_
 
       {
-    	    "journal_content": "test content",
-    	    "journal_title": "entry title",
-    	    "journal_type": "weekly", (or daily)
-    	    "journal_date": 1919394
+            "journal_content": "test content",
+            "journal_title": "entry title",
+            "journal_type": "weekly", (or daily)
+            "journal_date": 1919394
       }
 
 For journal date, determine your best format for doing that. You can use `moment.js`, or `Date.now()` with formatting.
@@ -88,9 +88,9 @@ where `id` is the selected post you're updating.
 _The object should follow this shape:_
 
       {
-    	    "journal_content": "test update content",
-    	    "journal_title": "update entry title",
-    	    "journal_update": 1919394
+            "journal_content": "test update content",
+            "journal_title": "update entry title",
+            "journal_update": 1919394
       }
 
 journal_update will store the time it was updated, in case it's needed.
@@ -137,11 +137,11 @@ https://hr-bw3.herokuapp.com/api/activities
 _The object should follow this shape:_
 
       {
-    	    "activity_name": "Camping",
-    	    "activity_energy": 5,
-    	    "activity_enjoyment": 5,
-          "activity_engagement": 5,
-          "activity_date": 0393993
+            "activity_name": "Camping",
+            "activity_energy": 5,
+            "activity_enjoyment": 5,
+            "activity_engagement": 5,
+            "activity_date": 0393993
       }
 
 ## DELETING AN ACTIVITY
@@ -161,8 +161,8 @@ where `id` is the selected post you're updating.
 _The object should follow this shape:_
 
       {
-    	    "activity_name": "Camping",
-    	    "activity_energy": 5,
-    	    "activity_enjoyment": 5,
-          "activity_engagement": 5,
+            "activity_name": "Camping",
+            "activity_energy": 5,
+            "activity_enjoyment": 5,
+            "activity_engagement": 5,
       }
