@@ -5,14 +5,14 @@ module.exports = {
   find,
   findBy,
   findById,
-  findEntryById,
+  returnEntry,
   update,
   remove
 };
 
 async function insert(entry) {
   const [id] = await db('journal_entries').insert(entry);
-  return findById(id);
+  return returnEntry(id);
 }
 
 function find() {
@@ -27,8 +27,10 @@ function findById(id) {
   return db('journal_entries').where({ user_id: id });
 }
 
-function findEntryById(id) {
-  return db('journal_entries').where(id);
+function returnEntry(id) {
+  return db('journal_entries')
+    .where({ id })
+    .first();
 }
 
 function update(id, changes) {

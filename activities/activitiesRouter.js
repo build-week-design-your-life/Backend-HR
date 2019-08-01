@@ -3,8 +3,9 @@ const router = require('express').Router();
 const ActivitiesDB = require('./activitiesModel');
 // const CategoriesDB = require('./activityCategoriesModel');
 
-router.get('/', (req, res) => {
-  console.log(`respond`, res);
+const { authenticate } = require('../auth/authenticate');
+
+router.get('/all', authenticate, (req, res) => {
   const activities = ActivitiesDB.find()
     .then(activities => {
       res.status(200).json(activities);
@@ -14,14 +15,25 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/activities', (req, res) => {
-  console.log(req);
-  const allCategories = CategoriesDB.find()
-    .then(categories => {
-      res.status(200).json(categories);
+router.get('/:id', authenticate, (req, res) => {
+  const { id } = req.params;
+  ActivitiesDB.findById(id)
+    .then(activity => {
+      res.status(200).json(activity);
     })
     .catch(error => {
       res.status(400).json(error);
+    });
+});
+
+router.get('/mine', authenticate, (req, res) => {
+  const id = req.decoded.subject;
+  ActivitiesDB.findById(id)
+    .then(activities => {
+      res.status(200).json(activities);
+    })
+    .catch(error => {
+      res.status(500).json(error);
     });
 });
 

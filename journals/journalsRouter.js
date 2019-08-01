@@ -97,7 +97,7 @@ router.get('/:id', authenticate, (req, res) => {
       res.status(200).json(entry);
     })
     .catch(error => {
-      res.status(400).json({ message: 'not ok' });
+      res.status(400).json({ message: 'not ok', error });
     });
 });
 
@@ -107,7 +107,7 @@ router.post('/add', authenticate, (req, res) => {
   const combined = { user_id, ...journal };
   JournalsDB.insert(combined)
     .then(entry => {
-      res.status(201).json({ message: 'good work', entry });
+      res.status(201).json(entry);
     })
     .catch(error => {
       res.status(500).json(error);
@@ -118,7 +118,7 @@ router.delete('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   JournalsDB.remove(id)
     .then(removed => {
-      res.status(200).json({ message: `Entry successfully deleted.`, removed });
+      res.status(200).json({ message: `Removed ${removed} records.` });
     })
     .catch(error => {
       res.status(500).json(error);
@@ -130,7 +130,7 @@ router.put('/:id', authenticate, (req, res) => {
   const changes = req.body;
   JournalsDB.update(id, changes)
     .then(updated => {
-      res.status(200).json(updated);
+      res.status(200).json({ message: `Updated ${id}.`, updated });
     })
     .catch(error => {
       res.status(500).json(error);
