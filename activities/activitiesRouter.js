@@ -31,10 +31,14 @@ router.get('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   ActivitiesDB.findById(id)
     .then(activity => {
-      res.status(200).json(activity);
+      if (activity) {
+        res.status(200).json(activity);
+      } else {
+        res.status(404).json({ message: 'No activity with that ID.' });
+      }
     })
     .catch(error => {
-      res.status(400).json(error);
+      res.status(500).json(error);
     });
 });
 

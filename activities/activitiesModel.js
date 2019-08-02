@@ -25,16 +25,20 @@ function findBy(filter) {
 
 function findById(id) {
   return db('activities')
-    .where({ user_id: id })
+    .where({ id })
     .first()
     .then(activity => {
-      const average_rating = Math.round(
-        (activity.activity_energy +
-          activity.activity_enjoyment +
-          activity.activity_engagement) /
-          3
-      );
-      return { ...activity, average_rating };
+      if (activity) {
+        const average_rating = Math.round(
+          (activity.activity_energy +
+            activity.activity_enjoyment +
+            activity.activity_engagement) /
+            3
+        );
+        return { ...activity, average_rating };
+      } else {
+        return null;
+      }
     });
 }
 
