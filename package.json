@@ -1,0 +1,35 @@
+{
+  "name": "design-your-life-backend",
+  "version": "1.0.0",
+  "description": "a backend api for lambda school build week 3",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "test": "cross-env DB_ENV=development jest --watch",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/build-week-design-your-life/Backend-HR.git"
+  },
+  "author": "Hunter Raffety",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/build-week-design-your-life/Backend-HR/issues"
+  },
+  "homepage": "https://github.com/build-week-design-your-life/Backend-HR#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "cross-env": "^5.2.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "helmet": "^3.20.0",
+    "jest": "^24.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.1",
+    "pg": "^7.12.0",
+    "sqlite3": "^4.0.9",
+    "supertest": "^4.0.2"
+  }
+}
