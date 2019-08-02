@@ -36,7 +36,10 @@ function returnEntry(id) {
 function update(id, changes) {
   return db('journal_entries')
     .where({ id })
-    .update(changes);
+    .update(changes)
+    .then(journal => {
+      return db('journal_entries').where({ id });
+    });
 }
 
 function remove(id) {
