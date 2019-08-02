@@ -6,12 +6,13 @@ module.exports = {
   findBy,
   findById,
   update,
+  returnActivity,
   remove
 };
 
 async function insert(activity) {
   const [id] = await db('activities').insert(activity);
-  return findById(id);
+  return returnActivity(id);
 }
 
 function find() {
@@ -20,10 +21,6 @@ function find() {
 
 function findBy(filter) {
   return db('activities').where(filter);
-}
-
-function findById(id) {
-  return db('activities').where({ user_id: id });
 }
 
 function findById(id) {
@@ -37,9 +34,14 @@ function findById(id) {
           activity.activity_engagement) /
           3
       );
-      console.log(average_rating);
       return { ...activity, average_rating };
     });
+}
+
+function returnActivity(id) {
+  return db('activities')
+    .where({ id })
+    .first();
 }
 
 function update(id, changes) {

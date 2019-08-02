@@ -15,6 +15,18 @@ router.get('/all', authenticate, (req, res) => {
     });
 });
 
+router.post('/add', authenticate, validateActivity, (req, res) => {
+  const user_id = req.decoded.subject;
+  const combined = { user_id, ...journal };
+  ActivitiesDB.insert(combined)
+    .then(entry => {
+      res.status(201).json(entry);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
 router.get('/:id', authenticate, (req, res) => {
   const { id } = req.params;
   ActivitiesDB.findById(id)
@@ -36,5 +48,30 @@ router.get('/mine', authenticate, (req, res) => {
       res.status(500).json(error);
     });
 });
+
+router.delete('/:id', authenticate, async (req, res) => {
+  const { id } = req.params;
+  ActivitiesDB.remove(id)
+    .then(removed => {
+      if (removed > 0) {
+        res.status(200).json({ message: 'Removed activity.' });
+      } else {
+        res.status(404).json({ message: 'Activity not found' });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+function validateActivity(req, res, next) {
+  const { entry } = req.body;
+  if (Object.keys(req.body).length < 3) {
+    res.status(400).json({ message: 'Missing journal data.' });
+  } else {
+    journal = req.body;
+    next();
+  }
+}
 
 module.exports = router;
