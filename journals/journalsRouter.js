@@ -6,39 +6,6 @@ const JournalsDB = require('./journalsModel');
 
 const { authenticate } = require('../auth/authenticate');
 
-// router.get('/daily', (req, res) => {
-//   res.status(400).json({ error: 'No user ID.' });
-// });
-
-// router.get('/weekly', (req, res) => {
-//   res.status(400).json({ error: 'No user ID.' });
-// });
-
-// router.get('/:type', authenticate, (req, res) => {
-//   const { type } = req.params;
-//   console.log(req.decoded);
-//   const id = req.decoded.subject;
-//   JournalsDB.findBy(type, id)
-//     .then(filtered => {
-//       console.log(filtered);
-//       res.status(200).json(filtered);
-//     })
-//     .catch(error => {
-//       res.status(500).json(error);
-//     });
-// });
-
-// router.get('/mine', authenticate, (req, res) => {
-//   const id = req.decoded.subject;
-//   JournalsDB.findById(id)
-//     .then(entries => {
-//       res.status(200).json(entries);
-//     })
-//     .catch(error => {
-//       res.status(500).json(error);
-//     });
-// });
-
 router.get('/all', authenticate, (req, res) => {
   JournalsDB.find()
     .then(entries => {
@@ -48,34 +15,6 @@ router.get('/all', authenticate, (req, res) => {
       res.status(500).json({ error: 'Uh oh, you done messed up A-A-ron!' });
     });
 });
-
-// router.get('/daily', authenticate, (req, res) => {
-//   const id = req.decoded.subject;
-//   console.log(req.decoded);
-//   const filter = 'daily';
-//   console.log(req.params);
-//   JournalsDB.findBy(filter, id)
-//     .then(entries => {
-//       res.status(200).json(entries);
-//     })
-//     .catch(error => {
-//       res.status(500).json(error);
-//     });
-// });
-
-// router.get('/weekly', authenticate, (req, res) => {
-//   const id = req.decoded.subject;
-//   console.log(req.decoded);
-//   const filter = 'weekly';
-//   console.log(req.params);
-//   JournalsDB.findBy(filter, id)
-//     .then(entries => {
-//       res.status(200).json(entries);
-//     })
-//     .catch(error => {
-//       res.status(500).json(error);
-//     });
-// });
 
 router.get('/mine', authenticate, (req, res) => {
   const id = req.decoded.subject;
@@ -90,20 +29,21 @@ router.get('/mine', authenticate, (req, res) => {
 
 router.get('/:id', authenticate, (req, res) => {
   const { id } = req.params;
-
-  JournalsDB.findEntryById({ id })
+  JournalsDB.returnEntry(id)
     .then(entry => {
-      console.log(entry);
-      res.status(200).json(entry);
+      if (entry) {
+        res.status(200).json(entry);
+      } else {
+        res.status(404).json({ message: 'Entry not found' });
+      }
     })
     .catch(error => {
       res.status(400).json({ message: 'not ok', error });
     });
 });
 
-router.post('/add', authenticate, (req, res) => {
+router.post('/add', authenticate, validateJournal, (req, res) => {
   const user_id = req.decoded.subject;
-  const journal = req.body;
   const combined = { user_id, ...journal };
   JournalsDB.insert(combined)
     .then(entry => {
@@ -114,11 +54,15 @@ router.post('/add', authenticate, (req, res) => {
     });
 });
 
-router.delete('/:id', authenticate, (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
   const { id } = req.params;
   JournalsDB.remove(id)
     .then(removed => {
-      res.status(200).json({ message: `Removed ${removed} records.` });
+      if (removed > 0) {
+        res.status(200).json({ message: 'Removed journal entry.' });
+      } else {
+        res.status(404).json({ message: 'Journal entry not found' });
+      }
     })
     .catch(error => {
       res.status(500).json(error);
@@ -130,22 +74,25 @@ router.put('/:id', authenticate, (req, res) => {
   const changes = req.body;
   JournalsDB.update(id, changes)
     .then(updated => {
-      res.status(200).json({ message: `Updated ${id}.`, updated });
+      if (updated) {
+        res.status(200).json({ message: `Updated ${id}.`, updated });
+      } else {
+        res.status(404).json({ message: 'Journal not found.' });
+      }
     })
     .catch(error => {
       res.status(500).json(error);
     });
 });
 
-// router.get('/weekly/:id', (req, res) => {
-//   const { id } = req.params;
-//   const weeklyEntries = JournalsDB.findById()
-//     .then(weekly => {
-//       res.status(200).json(weekly);
-//     })
-//     .catch(error => {
-//       res.status(400).json(error);
-//     });
-// });
+function validateJournal(req, res, next) {
+  const { entry } = req.body;
+  if (Object.keys(req.body).length < 4) {
+    res.status(400).json({ message: 'Missing journal data.' });
+  } else {
+    journal = req.body;
+    next();
+  }
+}
 
 module.exports = router;

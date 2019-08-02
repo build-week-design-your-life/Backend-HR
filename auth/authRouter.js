@@ -9,9 +9,7 @@ const jwt = require('jsonwebtoken');
 const secrets = require('../config/secrets');
 
 // register a user.
-router.post('/register', (req, res) => {
-  let user = req.body;
-  console.log(req.body);
+router.post('/register', validateUser, (req, res) => {
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
 
@@ -58,6 +56,20 @@ function generateToken(user) {
     expiresIn: '3d'
   };
   return jwt.sign(payload, secrets.jwtSecret, options);
+}
+
+function validateUser(req, res, next) {
+  const { username, password } = req.body;
+  if (Object.keys(req.body).length === 0) {
+    res.status(400).json({ message: 'Missing user data.' });
+  } else if (!username) {
+    res.status(400).json({ message: 'Please supply a username.' });
+  } else if (!password) {
+    res.status(400).json({ message: 'Please supply a password.' });
+  } else {
+    user = req.body;
+    next();
+  }
 }
 
 module.exports = router;
