@@ -68,6 +68,22 @@ router.delete('/:id', authenticate, async (req, res) => {
     });
 });
 
+router.put('/:id', authenticate, (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+  ActivitiesDB.update(id, changes)
+    .then(updated => {
+      if (updated) {
+        res.status(200).json({ message: `Updated ${id}.`, updated });
+      } else {
+        res.status(404).json({ message: 'Activity not found.' });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
 function validateActivity(req, res, next) {
   const { entry } = req.body;
   if (Object.keys(req.body).length < 3) {
