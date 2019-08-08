@@ -1,3 +1,5 @@
+# While this project for Lambda's 3rd and final build week has ended, it will be actively maintained by Hunter Raffety. The development will continue to implement the front-end once Lambda Labs is complete as a side project.
+
 # Design Your Life Backend API Endpoints
 
 **BACKEND API URL:**
