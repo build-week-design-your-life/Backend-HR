@@ -1,7 +1,6 @@
 const router = require('express').Router();
 
 const ActivitiesDB = require('./activitiesModel');
-// const CategoriesDB = require('./activityCategoriesModel');
 
 const { authenticate } = require('../auth/authenticate');
 
